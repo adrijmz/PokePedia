@@ -15,6 +15,11 @@ public class Pokemon implements Serializable {
         this.url = url;
     }
 
+    public Pokemon(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
     @SerializedName("name")
     private String name;
 

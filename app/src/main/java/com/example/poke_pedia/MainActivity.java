@@ -1,5 +1,6 @@
 package com.example.poke_pedia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,21 +9,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.poke_pedia.db.DataBaseUsers;
 import com.example.poke_pedia.model.Pokemon;
 import com.example.poke_pedia.model.PokemonAdapter;
-import com.example.poke_pedia.model.Stats;
 import com.example.poke_pedia.util.GetDataThread;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private List<Pokemon> listPokemons = new ArrayList<>();
+    private DataBaseUsers db = new DataBaseUsers(this);
+    private boolean session;
+    private boolean stayLogged;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updatePokemons(List<Pokemon> pokemons){
+//        for(Pokemon p : pokemons)
+//            PokemonDB.insertPokemon(db.getReadableDatabase(),p);
         this.listPokemons.addAll(pokemons);
         ListView listView = findViewById(R.id.all_pokemons_list);
         ((PokemonAdapter) listView.getAdapter()).updatePokemons(pokemons);
@@ -81,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updatePokemons(listPokemons);
         Toast.makeText(MainActivity.this, "onResume", Toast.LENGTH_LONG).show();
     }
 
@@ -89,5 +93,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Toast.makeText(MainActivity.this, "onPause", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
