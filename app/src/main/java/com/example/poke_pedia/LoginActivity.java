@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,31 +16,33 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        EditText username = (EditText) findViewById(R.id.username1);
-        EditText password = (EditText) findViewById(R.id.password1);
-        Button btnlogin = (Button) findViewById(R.id.btnsignin1);
         DataBaseUsers DB = new DataBaseUsers(this);
-        btnlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
+        EditText username = findViewById(R.id.username_edittxt_login);
+        EditText password = findViewById(R.id.password_edittxt_login);
+        Button loginButton = findViewById(R.id.signin_button_login);
 
-                if(user.equals("")||pass.equals(""))
-                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                else{
-                    Boolean checkuserpass = DB.checkUserPass(user, pass);
-                    if(checkuserpass==true){
-                        Toast.makeText(LoginActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
-                    }
+        loginButton.setOnClickListener(view -> {
+
+            String user = username.getText().toString();
+            String pass = password.getText().toString();
+
+            if(user.equals("")||pass.equals(""))
+                Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+            else{
+                boolean checkUserPass = DB.checkUserPass(user, pass);
+                if(checkUserPass){
+                    Toast.makeText(LoginActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
+                    Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
+                    MySharedPreference.setUserName(LoginActivity.this,user);
+                    startActivity(intent);
                 }
+                else
+                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
         });
+
+        Button createUser = findViewById(R.id.create_user_button_login);
+        createUser.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(),SignupActivity.class)));
     }
 }

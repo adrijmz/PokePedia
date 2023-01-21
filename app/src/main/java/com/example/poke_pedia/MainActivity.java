@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,34 +22,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Pokemon> listPokemons = new ArrayList<>();
-    private DataBaseUsers db = new DataBaseUsers(this);
-    private boolean session;
-    private boolean stayLogged;
-
+    private final List<Pokemon> listPokemons = new ArrayList<>();
+    private final DataBaseUsers myDB = new DataBaseUsers(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button misPokemonButton = findViewById(R.id.mis_pokemon_button_main);
-        misPokemonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MisPokemon.class);
-                startActivity(intent);
-            }
-        });
-
-        Button buscarPokemonButton = findViewById(R.id.buscar_pokemon_button_id);
-        buscarPokemonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BuscarPokemon.class);
-                startActivity(intent);
-            }
-        });
+        listPokemons.addAll(myDB.getPokemons());
 
         ListView allPokemons = findViewById(R.id.all_pokemons_list);
         if(listPokemons.size()!=0)
@@ -65,38 +47,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        allPokemons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(),PokemonStats.class);
-                intent.putExtra("POKEMON_STAT",listPokemons.get(i));
-                startActivity(intent);
-            }
+        allPokemons.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(getApplicationContext(),PokemonStats.class);
+            intent.putExtra("POKEMON_STAT",listPokemons.get(i));
+            startActivity(intent);
+        });
+
+        ImageView logout = findViewById(R.id.logout_button_main);
+        logout.setOnClickListener(view -> {
+            MySharedPreference.setUserName(MainActivity.this,"");
+            startActivity(new Intent(getApplicationContext(),SignupActivity.class));
         });
     }
 
     public void updatePokemons(List<Pokemon> pokemons){
-//        for(Pokemon p : pokemons)
-//            PokemonDB.insertPokemon(db.getReadableDatabase(),p);
-        this.listPokemons.addAll(pokemons);
+        for(Pokemon p : pokemons)
+            myDB.insertPokemon(p);
+        this.listPokemons.addAll(myDB.getPokemons());
+        System.err.println("size of list "+listPokemons.size());
         ListView listView = findViewById(R.id.all_pokemons_list);
-        ((PokemonAdapter) listView.getAdapter()).updatePokemons(pokemons);
+        ((PokemonAdapter) listView.getAdapter()).updatePokemons(listPokemons);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(MainActivity.this, "onResume", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(MainActivity.this, "onPause", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 }

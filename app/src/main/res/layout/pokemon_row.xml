@@ -24,7 +24,7 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
-                android:text="TextView" />
+                android:text="@string/textview_str_statrow" />
 
             <ImageView
                 android:id="@+id/pokemon_image"

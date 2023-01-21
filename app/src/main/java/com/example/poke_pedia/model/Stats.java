@@ -6,6 +6,11 @@ import java.io.Serializable;
 
 public class Stats implements Serializable {
 
+    public Stats(int base_stat, Stat stat){
+        this.base_stat = base_stat;
+        this.stat = stat;
+    }
+
     public int getBase_stat() {
         return base_stat;
     }

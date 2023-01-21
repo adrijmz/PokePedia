@@ -6,6 +6,10 @@ import java.io.Serializable;
 
 public class Stat implements Serializable {
 
+    public Stat(String name){
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

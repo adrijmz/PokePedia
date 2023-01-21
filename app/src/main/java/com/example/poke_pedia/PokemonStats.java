@@ -33,7 +33,6 @@ import java.util.List;
 
 public class PokemonStats extends AppCompatActivity {
 
-    NotificationHandler handler;
     Pokemon pokemon;
 
     @Override
@@ -49,7 +48,6 @@ public class PokemonStats extends AppCompatActivity {
             }
         });
 
-        handler = new NotificationHandler(this);
         pokemon = (Pokemon) getIntent().getSerializableExtra("POKEMON_STAT");
 
         ImageView pokemonImage = findViewById(R.id.pokemon_image_pokemon_stats);
@@ -105,9 +103,6 @@ public class PokemonStats extends AppCompatActivity {
 
                 sendIntent.putExtra(Intent.EXTRA_TEXT, text);
                 sendIntent.setType("text/plain");
-
-                Notification.Builder nBuilder = handler.createNotification("Share", "Sharing "+pokemon.getName()+"'s data", true);
-                handler.getManager().notify(1,nBuilder.build());
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);

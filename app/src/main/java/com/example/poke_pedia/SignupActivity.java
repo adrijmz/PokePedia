@@ -2,9 +2,9 @@ package com.example.poke_pedia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,49 +18,47 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
-        EditText repassword = findViewById(R.id.repassword);
-        Button signup = findViewById(R.id.btnsignup);
-        Button signin = findViewById(R.id.btnsignin);
+        if(MySharedPreference.getUserName(SignupActivity.this).length()>0){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+
+        NotificationHandler handler = new NotificationHandler(this);
         DataBaseUsers DB = new DataBaseUsers(this);
 
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
-                String repass = repassword.getText().toString();
+        EditText username = findViewById(R.id.username_edittxt_signup);
+        EditText password = findViewById(R.id.password_edittxt_signup);
+        EditText email = findViewById(R.id.email_edittxt_signup);
+        Button signup = findViewById(R.id.register_button_signup);
+        Button signin = findViewById(R.id.signin_button_signup);
 
-                if(user.equals("")||pass.equals("")||repass.equals(""))
-                    Toast.makeText(SignupActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                else{
-                    if(pass.equals(repass)){
-                        Boolean checkuser = DB.checkUsername(user);
-                        if(checkuser==false){
-                            Boolean insert = DB.insertData(user, pass);
-                            if(insert==true){
-                                Toast.makeText(SignupActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                                startActivity(intent);
-                            }else{
-                                Toast.makeText(SignupActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
-                            Toast.makeText(SignupActivity.this, "User already exists! please sign in", Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-                        Toast.makeText(SignupActivity.this, "Passwords not matching", Toast.LENGTH_SHORT).show();
+        signup.setOnClickListener(view -> {
+            String user = username.getText().toString();
+            String pass = password.getText().toString();
+            String emailStr = email.getText().toString();
+
+            if(user.equals("")||pass.equals("")||emailStr.equals(""))
+                Toast.makeText(SignupActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+            else{
+                boolean checkUser = DB.checkUsername(user);
+                if(!checkUser){
+                    boolean insert = DB.insertData(user, pass);
+                    if(insert){
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        Toast.makeText(SignupActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                        Notification.Builder nBuilder = handler.createNotification("PokePedia register", "We have sent you an email to verify your account", true);
+                        handler.getManager().notify(1,nBuilder.build());
+                        startActivity(intent);
                     }
-                } }
-        });
-        signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                    else
+                        Toast.makeText(SignupActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(SignupActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
             }
+        });
+        signin.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
         });
     }
 }

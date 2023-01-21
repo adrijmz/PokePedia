@@ -27,7 +27,7 @@ public class GetDataThread implements Runnable {
         String pokemonsData = "";
         try {
             pokemonsData =
-                    NetUtil.getURLText("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0");
+                    NetUtil.getURLText("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0");
             System.err.println(pokemonsData);
         } catch (Exception e) {
             e.printStackTrace();

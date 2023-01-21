@@ -7,26 +7,34 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/username1"
+        android:id="@+id/username_edittxt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User Name"
+        android:hint="@string/user_name_str_signin"
         android:layout_marginTop="50dp"/>
 
     <EditText
-        android:id="@+id/password1"
+        android:id="@+id/password_edittxt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password_str_signin"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/username1"/>
+        android:layout_below="@+id/username_edittxt_login"/>
 
     <Button
-        android:id="@+id/btnsignin1"
+        android:id="@+id/signin_button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:text="@string/sign_in_str_signin"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/password1"/>
+        android:layout_below="@+id/password_edittxt_login"/>
+
+    <Button
+        android:id="@+id/create_user_button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/password_edittxt_login"
+        android:layout_marginBottom="-200dp"
+        android:text="@string/create_an_account_str_signin" />
 
 </RelativeLayout>
