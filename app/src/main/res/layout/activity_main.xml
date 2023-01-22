@@ -18,9 +18,12 @@
 
     <Button
         android:id="@+id/download_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:text="@string/download_str_main"
+        android:background="@drawable/custom_button"
+        android:textAllCaps="false"
+        android:textColor="#FA71CD"
         app:layout_constraintBottom_toTopOf="@+id/all_pokemons_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

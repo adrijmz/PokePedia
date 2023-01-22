@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,41 +8,71 @@
 
     <EditText
         android:id="@+id/username_edittxt_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
         android:hint="@string/user_name_str_signup"
-        android:layout_marginTop="50dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.140" />
 
     <EditText
         android:id="@+id/password_edittxt_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/username_edittxt_signup"
         android:hint="@string/password_str_signup"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/username_edittxt_signup"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
 
     <EditText
         android:id="@+id/email_edittxt_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/password_edittxt_signup"
         android:hint="@string/email_str_signup"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/password_edittxt_signup"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
 
     <Button
         android:id="@+id/register_button_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/email_edittxt_signup"
         android:text="@string/register_str_signup"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/email_edittxt_signup"/>
+        android:background="@drawable/custom_button"
+        android:textAllCaps="false"
+        android:textColor="#FA71CD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.560" />
 
     <Button
         android:id="@+id/signin_button_signup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/register_button_signup"
+        android:background="@drawable/custom_button"
         android:text="@string/already_have_an_account_str_signup"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/register_button_signup"/>
+        android:textAllCaps="false"
+        android:textColor="#FA71CD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.70" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

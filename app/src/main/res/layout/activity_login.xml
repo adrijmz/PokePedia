@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,33 +8,57 @@
 
     <EditText
         android:id="@+id/username_edittxt_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="36dp"
         android:hint="@string/user_name_str_signin"
-        android:layout_marginTop="50dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.140" />
 
     <EditText
         android:id="@+id/password_edittxt_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/username_edittxt_login"
+        android:layout_marginEnd="36dp"
         android:hint="@string/password_str_signin"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/username_edittxt_login"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
 
     <Button
         android:id="@+id/signin_button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/password_edittxt_login"
         android:text="@string/sign_in_str_signin"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/password_edittxt_login"/>
+        android:background="@drawable/custom_button"
+        android:textAllCaps="false"
+        android:textColor="#FA71CD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44" />
 
     <Button
         android:id="@+id/create_user_button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
         android:layout_alignBottom="@+id/password_edittxt_login"
-        android:layout_marginBottom="-200dp"
-        android:text="@string/create_an_account_str_signin" />
+        android:text="@string/create_an_account_str_signin"
+        android:background="@drawable/custom_button"
+        android:textAllCaps="false"
+        android:textColor="#FA71CD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
