@@ -1,7 +1,5 @@
 package com.example.poke_pedia;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,8 +14,8 @@ public class NotificationHandler extends ContextWrapper {
     private NotificationManager manager;
     public static final String CHANNEL_HIGH_ID = "1";
     public static final String CHANNEL_LOW_ID = "2";
-    private final String CHANNEL_HIGH_NAME = "HIGH CHANNEL";
-    private final String CHANNEL_LOW_NAME = "LOW CHANNEL";
+    private final String HIGH_CH = "HIGH CHANNEL";
+    private final String LOW_CH = "LOW CHANNEL";
 
     public NotificationHandler(Context base) {
         super(base);
@@ -29,12 +27,10 @@ public class NotificationHandler extends ContextWrapper {
         return manager;
     }
     public void createChannels () {
-        NotificationChannel highChannel = new NotificationChannel(CHANNEL_HIGH_ID, CHANNEL_HIGH_NAME, NotificationManager.IMPORTANCE_HIGH);
-        // Configuration
+        NotificationChannel highChannel = new NotificationChannel(CHANNEL_HIGH_ID, HIGH_CH, NotificationManager.IMPORTANCE_HIGH);
         highChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
 
-        NotificationChannel lowChanel = new NotificationChannel(CHANNEL_LOW_ID, CHANNEL_LOW_NAME, NotificationManager.IMPORTANCE_LOW);
-        //Configuration
+        NotificationChannel lowChanel = new NotificationChannel(CHANNEL_LOW_ID, LOW_CH, NotificationManager.IMPORTANCE_LOW);
         lowChanel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
         getManager().createNotificationChannel(highChannel);

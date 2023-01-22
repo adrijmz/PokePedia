@@ -32,10 +32,6 @@ public class SerializableBitMap implements Serializable {
         }
     }
 
-    /**
-     * Included for serialization - read this object from the supplied input
-     * stream.
-     */
     private void readObject(ObjectInputStream in) throws IOException,
             ClassNotFoundException {
         in.defaultReadObject();

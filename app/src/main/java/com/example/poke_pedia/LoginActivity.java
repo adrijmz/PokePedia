@@ -25,12 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.signin_button_login);
 
         TextView forgotPass = findViewById(R.id.forgot_pass_textview);
-        forgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
-            }
-        });
+        forgotPass.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ForgotPassword.class)));
 
         loginButton.setOnClickListener(view -> {
 
@@ -42,13 +37,13 @@ public class LoginActivity extends AppCompatActivity {
             else{
                 boolean checkUserPass = DB.checkUserPass(user, pass);
                 if(checkUserPass){
-                    Toast.makeText(LoginActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
                     Intent intent  = new Intent(getApplicationContext(), MainActivity.class);
                     MySharedPreference.setUserName(LoginActivity.this,user);
                     startActivity(intent);
                 }
                 else
-                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -38,13 +38,10 @@ public class MainActivity extends AppCompatActivity {
         else
             allPokemons.setAdapter(new PokemonAdapter(new ArrayList<Pokemon>()));
         Button downloadButton = findViewById(R.id.download_button);
-        downloadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GetDataThread downloadTh = new GetDataThread(MainActivity.this);
-                Thread th = new Thread(downloadTh);
-                th.start();
-            }
+        downloadButton.setOnClickListener(view -> {
+            GetDataThread downloadTh = new GetDataThread(MainActivity.this);
+            Thread th = new Thread(downloadTh);
+            th.start();
         });
 
         allPokemons.setOnItemClickListener((adapterView, view, i, l) -> {

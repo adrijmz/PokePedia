@@ -44,17 +44,14 @@ public class GetDataThread implements Runnable {
 
         //obtengo imagen pokemon
         for(Pokemon p : dataArray){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Bitmap imagePokemon = null;
-                    try {
-                        imagePokemon = NetUtil.getURLBitmap("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+p.getId()+".png");
-                        SerializableBitMap serializableBitMap = new SerializableBitMap(imagePokemon);
-                        p.setImage(serializableBitMap);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            new Thread(() -> {
+                Bitmap imagePokemon = null;
+                try {
+                    imagePokemon = NetUtil.getURLBitmap("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+p.getId()+".png");
+                    SerializableBitMap serializableBitMap = new SerializableBitMap(imagePokemon);
+                    p.setImage(serializableBitMap);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }).start();
         }

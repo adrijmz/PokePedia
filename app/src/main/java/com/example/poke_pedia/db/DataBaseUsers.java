@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseUsers extends SQLiteOpenHelper {
-    public static final String DBNAME = "prueba8.db";
+    public static final String DBNAME = "prueba9.db";
     public DataBaseUsers(Context context) {
         super(context, DBNAME, null, 1);
     }

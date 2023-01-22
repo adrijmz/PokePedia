@@ -41,27 +41,19 @@ public class PokemonStats extends AppCompatActivity {
         setContentView(R.layout.activity_pokemon_stats);
 
         ImageView goBack = findViewById(R.id.go_back_button_pokemon_stats);
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });
+        goBack.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
         pokemon = (Pokemon) getIntent().getSerializableExtra("POKEMON_STAT");
 
         ImageView pokemonImage = findViewById(R.id.pokemon_image_pokemon_stats);
         pokemonImage.setImageBitmap(pokemon.getImage().getBitmap());
 
-        pokemonImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap image = pokemon.getImage().getBitmap();
-                if(isExternalStorageWritable())
-                   saveImageExternal(image);
-                else
-                    Toast.makeText(PokemonStats.this,"External storage is not writeable",Toast.LENGTH_LONG).show();
-            }
+        pokemonImage.setOnClickListener(view -> {
+            Bitmap image = pokemon.getImage().getBitmap();
+            if(isExternalStorageWritable())
+               saveImageExternal(image);
+            else
+                Toast.makeText(PokemonStats.this,"External storage is not writeable",Toast.LENGTH_LONG).show();
         });
 
         TextView pokemonName = findViewById(R.id.pokemon_name_pokemon_stats);
@@ -88,25 +80,22 @@ public class PokemonStats extends AppCompatActivity {
         stat5.setText(stats.get(5).getStat().getName()+": "+stats.get(5).getBase_stat());
 
         ImageView shareButton = findViewById(R.id.share_button_pokemon_stats);
-        shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                String text = pokemon.getName()+"'s stats:\n" +
-                        pokemon.getStats().get(0).getStat().getName()+": "+pokemon.getStats().get(0).getBase_stat()+"\n∑"+
-                        pokemon.getStats().get(1).getStat().getName()+": "+pokemon.getStats().get(1).getBase_stat()+"\n"+
-                        pokemon.getStats().get(2).getStat().getName()+": "+pokemon.getStats().get(2).getBase_stat()+"\n"+
-                        pokemon.getStats().get(3).getStat().getName()+": "+pokemon.getStats().get(3).getBase_stat()+"\n"+
-                        pokemon.getStats().get(4).getStat().getName()+": "+pokemon.getStats().get(4).getBase_stat()+"\n"+
-                        pokemon.getStats().get(5).getStat().getName()+": "+pokemon.getStats().get(5).getBase_stat();
+        shareButton.setOnClickListener(view -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            String text = pokemon.getName()+"'s stats:\n" +
+                    pokemon.getStats().get(0).getStat().getName()+": "+pokemon.getStats().get(0).getBase_stat()+"\n∑"+
+                    pokemon.getStats().get(1).getStat().getName()+": "+pokemon.getStats().get(1).getBase_stat()+"\n"+
+                    pokemon.getStats().get(2).getStat().getName()+": "+pokemon.getStats().get(2).getBase_stat()+"\n"+
+                    pokemon.getStats().get(3).getStat().getName()+": "+pokemon.getStats().get(3).getBase_stat()+"\n"+
+                    pokemon.getStats().get(4).getStat().getName()+": "+pokemon.getStats().get(4).getBase_stat()+"\n"+
+                    pokemon.getStats().get(5).getStat().getName()+": "+pokemon.getStats().get(5).getBase_stat();
 
-                sendIntent.putExtra(Intent.EXTRA_TEXT, text);
-                sendIntent.setType("text/plain");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+            sendIntent.setType("text/plain");
 
-                Intent shareIntent = Intent.createChooser(sendIntent, null);
-                startActivity(shareIntent);
-            }
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
         });
     }
 
