@@ -28,4 +28,7 @@
     <string name="textview8_stats">TextView</string>
     <string name="download_str_main">Download</string>
     <string name="textview_str_statrow">TextView</string>
+    <string name="forgot_password_str"><u>Forgot password?</u></string>
+    <string name="new_password_str">New password</string>
+    <string name="change_password_str">Change password</string>
 </resources>

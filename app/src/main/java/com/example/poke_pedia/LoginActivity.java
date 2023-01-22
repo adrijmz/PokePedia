@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.poke_pedia.db.DataBaseUsers;
@@ -21,6 +23,14 @@ public class LoginActivity extends AppCompatActivity {
         EditText username = findViewById(R.id.username_edittxt_login);
         EditText password = findViewById(R.id.password_edittxt_login);
         Button loginButton = findViewById(R.id.signin_button_login);
+
+        TextView forgotPass = findViewById(R.id.forgot_pass_textview);
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
+            }
+        });
 
         loginButton.setOnClickListener(view -> {
 

@@ -3,16 +3,13 @@ package com.example.poke_pedia.util;
 import android.graphics.Bitmap;
 
 import com.example.poke_pedia.MainActivity;
-import com.example.poke_pedia.model.Ability;
 import com.example.poke_pedia.model.AllData;
 import com.example.poke_pedia.model.Pokemon;
 import com.example.poke_pedia.model.SerializableBitMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class GetDataThread implements Runnable {
 

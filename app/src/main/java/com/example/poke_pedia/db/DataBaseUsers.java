@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseUsers extends SQLiteOpenHelper {
-    public static final String DBNAME = "prueba5.db";
+    public static final String DBNAME = "prueba8.db";
     public DataBaseUsers(Context context) {
         super(context, DBNAME, null, 1);
     }
@@ -62,6 +62,22 @@ public class DataBaseUsers extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public boolean checkUserExists(String username){
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        Cursor cursor = myDB.rawQuery("SELECT * FROM users WHERE username = ?", new String[]{username});
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+
+    public void changePassword(String username, String pass){
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("password",pass);
+        int res = myDB.update("users",contentValues,"username=?",new String[]{username});
     }
 
     public boolean insertPokemon(Pokemon p){
