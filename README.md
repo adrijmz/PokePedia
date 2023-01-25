@@ -20,9 +20,11 @@ Muestra las estadisticas de cada pokemon, permitiendonos compartirlas ademas de 
 
 
 <h2>Futuras actualizaciones</h2>
+<ul>
     <li>
         Rediseño del grid en la pantalla principal para una mejor visualizacion de los pokemon
     </li>
     <li>
         Adicion de los movimientos de cada pokemon a la pantalla de estadisticas
     </li>
+</ul>
